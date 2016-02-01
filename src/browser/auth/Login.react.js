@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import React, {PropTypes} from 'react';
 import fields from '../../common/components/fields';
 import focusInvalidField from '../lib/focusInvalidField';
+import {FormattedHTMLMessage} from 'react-intl';
 
 class Login extends Component {
 
@@ -11,8 +12,8 @@ class Login extends Component {
     actions: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     fields: PropTypes.object.isRequired,
+    intl: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    msg: PropTypes.object.isRequired
   };
 
   static contextTypes = {
@@ -44,7 +45,7 @@ class Login extends Component {
   }
 
   render() {
-    const {fields, auth, msg} = this.props;
+    const {fields, auth, intl: {formatMessage}} = this.props;
     const {email, password} = fields;
 
     return (
@@ -52,25 +53,25 @@ class Login extends Component {
         <Helmet title="Login" />
         <form onSubmit={this.onFormSubmit}>
           <fieldset disabled={auth.formDisabled}>
-            <legend>{msg.auth.form.legend}</legend>
+            <legend><FormattedHTMLMessage id="auth.form.legend" /></legend>
             <input
               autoFocus
               maxLength="100" // Use maxLength, because react-native needs it.
-              placeholder={msg.auth.form.placeholder.email}
+              placeholder={formatMessage({id: 'auth.form.placeholder.email'})}
               {...email}
             />
             <br />
             <input
               maxLength="300"
-              placeholder={msg.auth.form.placeholder.password}
+              placeholder={formatMessage({id: 'auth.form.placeholder.password'})}
               type="password"
               {...password}
             />
             <br />
-            <button type="submit">{msg.auth.form.button.login}</button>
-            <span className="hint">{msg.auth.form.hint}</span>
+            <button type="submit"><FormattedHTMLMessage id="auth.form.button.login" />}</button>
+            <span className="hint"><FormattedHTMLMessage id="auth.form.hint" />}</span>
             {auth.formError &&
-              <p className="error-message">{auth.formError.message}</p>
+              <p className="error-message"><FormattedHTMLMessage id="auth.formError.message" /></p>
             }
           </fieldset>
         </form>

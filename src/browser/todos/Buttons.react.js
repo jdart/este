@@ -1,27 +1,28 @@
 import './Buttons.styl';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
+import {FormattedHTMLMessage} from 'react-intl';
 
 export default class Buttons extends Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
     clearAllEnabled: PropTypes.bool.isRequired,
-    msg: PropTypes.object.isRequired
+    intl: PropTypes.object.isRequired
   };
 
   render() {
-    const {actions, clearAllEnabled, msg} = this.props;
+    const {actions, clearAllEnabled} = this.props;
 
     return (
       <div className="buttons">
         <button
           disabled={!clearAllEnabled}
           onClick={actions.clearAllTodos}
-        >{msg.clearAll}</button>
+        ><FormattedHTMLMessage id="todos.clearAll" /></button>
         <button
           onClick={actions.addHundredTodos}
-        >{msg.add100}</button>
+        ><FormattedHTMLMessage id="todos.add100" /></button>
       </div>
     );
   }

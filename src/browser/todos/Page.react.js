@@ -6,24 +6,25 @@ import React, {PropTypes} from 'react';
 import Todos from './Todos.react';
 import fetch from '../../common/components/fetch';
 import {fetchUserTodos} from '../../common/todos/actions';
+import {FormattedHTMLMessage} from 'react-intl';
 
 class Page extends Component {
 
   static propTypes = {
     actions: PropTypes.object,
-    msg: PropTypes.object,
+    intl: PropTypes.object,
     todos: PropTypes.object
   };
 
   render() {
-    const {actions, msg: {todos: msg}, todos: {map, newTodo}} = this.props;
+    const {actions, intl, todos: {map, newTodo}} = this.props;
 
     return (
       <div className="todos-page">
-        <Helmet title={msg.title} />
-        <NewTodo {...{actions, msg, newTodo}} />
-        <Todos {...{actions, map, msg}} />
-        <Buttons clearAllEnabled={map.size > 0} {...{actions, msg}} />
+        <Helmet title={intl.formatMessage({id: "todos.title"})} />
+        <NewTodo {...{actions, intl, newTodo}} />
+        <Todos {...{actions, intl, map}} />
+        <Buttons clearAllEnabled={map.size > 0} {...{actions, intl}} />
       </div>
     );
   }

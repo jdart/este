@@ -10,6 +10,7 @@ import {IntlProvider} from 'react-intl';
 import {Provider} from 'react-redux';
 import {RouterContext, match} from 'react-router';
 import {createMemoryHistory} from 'history';
+import messages from '../../common/intl/messages';
 
 const fetchComponentDataAsync = async (dispatch, renderProps) => {
   const {components, location, params} = renderProps;
@@ -28,7 +29,7 @@ const fetchComponentDataAsync = async (dispatch, renderProps) => {
 const getAppHtml = (store, renderProps) =>
   ReactDOMServer.renderToString(
     <Provider store={store}>
-      <IntlProvider>
+      <IntlProvider locale="en" messages={messages.en}>
         <RouterContext {...renderProps} />
       </IntlProvider>
     </Provider>

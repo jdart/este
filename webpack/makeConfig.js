@@ -22,7 +22,7 @@ const loaders = {
   styl: '!stylus-loader'
 };
 
-const serverIp = ip.address();
+const serverIp = 'localhost';
 
 export default function makeConfig(isDevelopment) {
 

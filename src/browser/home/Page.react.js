@@ -9,34 +9,34 @@ export default class Page extends Component {
   static propTypes = {
     // Why not PropTypes.object.isRequired? Because:
     // https://github.com/rackt/react-router/issues/1505
-    msg: PropTypes.object
+    intl: PropTypes.object
   };
 
   render() {
-    const {msg: {home: msg}} = this.props;
+    const {intl: {formatMessage}} = this.props;
 
     return (
       <div className="home-page">
-        <Helmet title={msg.title} />
+        <Helmet title={formatMessage({id: "home.title"})} />
         <p>
-          <FormattedHTMLMessage defaultMessage={msg.infoHtml} />
+          <FormattedHTMLMessage id="home.infoHtml" />
         </p>
         <div className="tocheck">
-          <h2>{msg.toCheck.h2}</h2>
+          <h2><FormattedHTMLMessage id="home.toCheck.h2" /></h2>
           {/* Note require usage for image source. Very useful for CDN. */}
           <img alt="50x50 placeholder" src={require('./50x50.png')} />
           <ul>
-            {msg.toCheck.list.map(({key, text}) =>
+            {/*msg.toCheck.list.map(({key, text}) =>
               <li key={key}>
                 <FormattedHTMLMessage defaultMessage={text} />
               </li>
-            )}
+            )*/}
             <li>
-              {msg.toCheck.isomorphicPage}{' '}
+              <FormattedHTMLMessage id="home.toCheck.isomorphicPage" />{' '}
               <Link to="/this-is-not-the-web-page-you-are-looking-for">404</Link>
             </li>
             <li>
-              {msg.toCheck.andMuchMore}
+              <FormattedHTMLMessage id="home.toCheck.andMuchMore" />
             </li>
           </ul>
         </div>

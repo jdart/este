@@ -1,12 +1,13 @@
 import './NewTodo.styl';
 import Component from 'react-pure-render/component';
 import React, {PropTypes} from 'react';
+import {FormattedHTMLMessage} from 'react-intl';
 
 export default class NewTodo extends Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    msg: PropTypes.object.isRequired,
+    intl: PropTypes.object.isRequired,
     newTodo: PropTypes.object.isRequired
   };
 
@@ -28,7 +29,7 @@ export default class NewTodo extends Component {
   }
 
   render() {
-    const {msg, newTodo} = this.props;
+    const {intl: {formatMessage}, newTodo} = this.props;
 
     return (
       <input
@@ -37,7 +38,7 @@ export default class NewTodo extends Component {
         name="title"
         onChange={this.onInputChange}
         onKeyDown={this.onInputKeyDown}
-        placeholder={msg.newTodoPlaceholder}
+        placeholder={formatMessage({id: "todos.newTodoPlaceholder"})}
         value={newTodo.title}
       />
     );

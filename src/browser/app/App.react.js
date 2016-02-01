@@ -8,18 +8,18 @@ import RouterHandler from '../components/RouterHandler.react';
 import mapDispatchToProps from '../../common/app/mapDispatchToProps';
 import mapStateToProps from '../../common/app/mapStateToProps';
 import {connect} from 'react-redux';
+import {injectIntl} from 'react-intl';
 
 class App extends Component {
 
   static propTypes = {
     children: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    msg: PropTypes.object.isRequired,
     users: PropTypes.object.isRequired
   };
 
   render() {
-    const {location: {pathname}, msg, users: {viewer}} = this.props;
+    const {location: {pathname}, users: {viewer}} = this.props;
 
     return (
       // Pass data-pathname to allow route specific styling.
@@ -35,9 +35,9 @@ class App extends Component {
           titleTemplate="%s - Este.js"
         />
         {/* Pathname enforces rerender so activeClassName is updated. */}
-        <Header msg={msg} pathname={pathname} viewer={viewer} />
+        <Header pathname={pathname} viewer={viewer} />
         <RouterHandler {...this.props} />
-        <Footer msg={msg.app.footer} />
+        <Footer />
       </div>
     );
   }
@@ -48,4 +48,5 @@ class App extends Component {
 // import logRenderTime from '../lib/logRenderTime';
 // App = logRenderTime(App)
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(App));
+

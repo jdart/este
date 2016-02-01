@@ -1,21 +1,22 @@
 import Component from 'react-pure-render/component';
 import Helmet from 'react-helmet';
 import React, {PropTypes} from 'react';
+import {FormattedHTMLMessage} from 'react-intl';
 
 export default class Settings extends Component {
 
   static propTypes = {
-    msg: PropTypes.object
+    intl: PropTypes.object
   };
 
   render() {
-    const {msg} = this.props;
+    const {intl: {formatMessage}} = this.props;
 
     return (
       <div className="settings-page">
-        <Helmet title={msg.settings.title} />
+        <Helmet title={formatMessage({id: "settings.title"})} />
         <p>
-          {msg.settings.title}
+          <FormattedHTMLMessage id="settings.title" />
         </p>
       </div>
     );
